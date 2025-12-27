@@ -1,0 +1,284 @@
+import random
+""" ##### omat ##### """
+def tiedot():
+    print("Silmalasit Useless System")
+    print("Made by:")
+    print("gamejolt.com/@silmalasit")
+    print("Version 1")
+    return
+#####
+def annaluku(teksti = "Give me a number. ", minimiluku = 0, maximiluku = 1000):
+    while True:
+        luku = input(teksti)
+        if luku == "":
+            continue
+        elif luku == "!":
+            return 0
+        elif "!" not in luku:
+            try:
+                luku = int(luku)
+                if luku < minimiluku:
+                    print("Can not be less than", str(minimiluku) + ".")
+                elif luku > maximiluku:
+                    print("Can not be greater than", str(maximiluku) + ".")
+                elif (maximiluku >= luku >= minimiluku):
+                    return int(luku)
+            except Exception:
+                print("Invalid input.")
+                print("Try again.")
+""" ##### kääntäjä ##### """
+def kaantajamorsekoodi():
+    aakkoset = {"a":".-", "b":"-...", "c":"-.-.", "d":"-..", "e":".", "f":"..-.", "g":"--." \
+    , "h":"....", "i":"..", "j":".---", "k":"-.-", "l":".-..", "m":"--", "n":"-." \
+    , "o":"---", "p":".--.", "q":"--.-", "r":".-.", "s":"...", "t":"-", "u":"..-" \
+    , "v":"...-", "w":".--", "x":"-..-", "y":"-.--", "z":"--.."}
+    sana = input("What will be translated? ")
+    kaannos = ""
+    for i in range(len(sana)):
+        viimeisinmerkki = sana[i:i+1]
+        viimeisinmerkki = aakkoset[viimeisinmerkki]
+        kaannos = kaannos + viimeisinmerkki + "/"
+    print('"' + sana[0].upper() + sana[1:].lower() + '" is "' + kaannos + ' in morsecode')
+""" ##### kirjaimilla leikkimistä ##### """
+def sananpituudenlaskuri(sana = "word"):
+    if len(sana) > 1:
+        print('The word "' + sana + '" has', len(sana), "letters.")
+    elif len(sana) == 1:
+        print('The word "' + sana + '" has one letter."')
+#####
+def palindromitesti(sana = "word"):
+    if sana == sana[::-1]:
+        print(sana[0].upper() + sana[1:].lower(), "is a palindrome")
+    else:
+        print('The word "' + sana + '" is not a palindrome.')
+        print('It is "' + sana + ' normally and "' + sana[::-1] + '" in reverse.')
+#####
+def merkkienvaihto(sana = "word"):
+    korvattavat = input("What will be replaced? ")
+    sana = sana.replace(input(korvattavat, input('What do we replace "' + korvattavat + '" with? ')))
+    print('The word is now "' + sana + '."')
+""" ##### tekstipelit ##### """
+def kivipaperisakset():
+    print("Instructions:")
+    print("Rock > scissors")
+    print("Scissors > paper")
+    print("Paper > Rock")
+    print("")
+    vaihtoehdot = ("rock", "scissors", "paper", "r", "s", "p")
+    while True:
+        pelaajanvalinta = str(input("What do yoou choose? "))
+        if pelaajanvalinta == "!":
+            return
+        elif pelaajanvalinta.lower() in vaihtoehdot:
+            break
+        else:
+            continue
+    pelaajanvalinta = pelaajanvalinta[0].lower()
+    tietokoneenvalinta = random.randint(0, 2)
+    if pelaajanvalinta == "r":
+        pelaajanvalinta = 0
+    elif pelaajanvalinta == "s":
+        pelaajanvalinta = 1
+    elif pelaajanvalinta == "p":
+        pelaajanvalinta = 2
+    print("The program chose:")
+    print("\t" + vaihtoehdot[tietokoneenvalinta])
+    if pelaajanvalinta == tietokoneenvalinta:
+        print("Draw!")
+    elif (pelaajanvalinta + 1) == tietokoneenvalinta:
+        print("You won!")
+    elif (pelaajanvalinta == 2) and (tietokoneenvalinta == 0):
+        print("You won!")
+    else:
+        print("You lost!")
+    print("")
+    return
+#####
+def yritetaanarvatanumero():
+    arvaus = "The guess"
+    print("The program tries to guess your number")
+    maximiarvattavaluku = 1000
+    minimiarvattavaluku = 0
+    print("Your number can be 0 - 1000")
+    arvauksiajaljella = random.randint(15, 25)
+    print("The program can guess", arvauksiajaljella, "times.")
+    print("")
+    print("(!) Stop the game")
+    print("(0) show the instructions (these)")
+    print("(1)", arvaus, "is less than my number.")
+    print("(2)", arvaus, "is greater than my number.")
+    print("(3) Correct")
+    if input("Ready? ") == "!":
+        print("The game has stopped.")
+        return
+    print("")
+    while True:
+        print("Is your number...")
+        try:
+         arvaus = random.randint(minimiarvattavaluku, maximiarvattavaluku)
+        except Exception:
+            print("Error")
+            return
+        else:
+            while arvauksiajaljella > 0:
+                suhde = annaluku(str(arvaus) + " ",0, 4)
+                if suhde == 0:
+                    print("(!) Stop the game")
+                    print("(0) show the instructions (these)")
+                    print("(1)", arvaus, "is less than my number.")
+                    print("(2)", arvaus, "is greater than my number.")
+                    print("(3) Correct")
+                elif suhde == 1:
+                    arvauksiajaljella -= 1
+                    minimiarvattavaluku = arvaus + 1
+                    break
+                elif suhde == 2:
+                    arvauksiajaljella -= 1
+                    maximiarvattavaluku = arvaus - 1
+                    break
+                elif suhde == 3:
+                    print(arvaus, "is a good number.")
+                    return
+                elif suhde == "!":
+                    return
+            if arvauksiajaljella == 0:
+                print("I ran out of guesses.")
+                print("You won!")
+#####
+def yritaarvatanumero():
+    print("Try to guess a random number")
+    print("The program generates a number (min. 1 and max. 1000)")
+    print("and tells you if your guess was greater or smaller than.")
+    print('"!" Stops the game.')
+    arvauksiajaljella = annaluku("How many tries do you need? ")
+    if ("!" in str(arvauksiajaljella)) or (arvauksiajaljella == 0):
+        return
+    print("You can try", arvauksiajaljella, "times.")
+    arvattavaluku = random.randint(0,1000)
+    while arvauksiajaljella > 0:
+        arvattuluku = annaluku("What is my number? ")
+        if arvattuluku == "!":
+            print("The game has been stopped.")
+            return
+        elif arvattuluku > arvattavaluku:
+            arvauksiajaljella -= 1
+            print(arvattuluku,  "is greater than my number.")
+            if arvauksiajaljella == 1:
+                print("Only one guess left!")
+            elif arvauksiajaljella > 1:
+                print(arvauksiajaljella, "Guesses left.")
+        elif arvattuluku < arvattavaluku:
+            arvauksiajaljella -= 1
+            print(arvattuluku, "is less than my number.")
+            if arvauksiajaljella == 1:
+                print("Only one guess left!")
+            elif arvauksiajaljella > 1:
+                print(arvauksiajaljella, "Guesses left.")
+        elif arvattuluku == arvattavaluku:
+            print("Correct!")
+            return
+    print("You ran out of guesses!")
+    print("The number would have been" + str(arvattavaluku + "."))
+#####
+def numeronarvonta():
+    arvotutnumerot = []
+    print("Random number generator")
+    arvotaan = annaluku("How many numbers do you need? ", 0, 10)
+    if ("!" in str(arvotaan)) or (arvotaan == 0):
+        return
+    elif "!" not in str(arvotaan):
+        for i in range(arvotaan):
+            arvottuluku = random.randint(1,100)
+            arvottulukuint = int(arvottuluku)
+            if (arvottuluku not in arvotutnumerot):
+                arvotutnumerot.append(arvottulukuint)
+        arvotutnumerot.sort()
+        print("These are the numbers:")
+        for i in range(len(arvotutnumerot)):
+            print(arvotutnumerot[i])
+""" ##### Alku ##### """
+def kaantajat():
+    print("")
+    print("Translating")
+    while True:
+        print("(!) Go back")
+        print("(1) Morse code")
+        mitatehdaan = annaluku("What do we do? ", 1, 2)
+        if mitatehdaan == 0:
+            return
+        elif mitatehdaan == 1:
+            kaantajamorsekoodi()
+#####
+def kirjaimillaleikkimista():
+    print("")
+    print("Playing with words")
+    print("")
+    sana = str(input("Give me a word: "))
+    if sana == "!":
+        return
+    while True:
+        print("(!) Go back")
+        print("(1) New word")
+        print("(2) lenght")
+        print("(3) Palindrome test")
+        print("(4) Change letters")
+        mitatehdaan = annaluku("What do we do? ", 1, 3) #4)
+        if mitatehdaan == 0:
+            return
+        elif mitatehdaan == 1:
+            sana = str(input("Give me a word. "))
+        elif mitatehdaan == 2:
+            sananpituudenlaskuri(sana)
+        elif mitatehdaan == 3:
+            palindromitesti(sana)
+        elif mitatehdaan == 4:
+            merkkienvaihto()
+#####
+def tekstipelit():
+    print("")
+    while True:
+        print("Text-based games")
+        print("(!) Go back")
+        print("(1) Random number generator")
+        print("(2) Try to guess the number")
+        print("(3) The program tries to guess your number")
+        print("(4) Rock paper scissors")
+        mitatehdaan = annaluku("What do we do? ", 1, 5)
+        if mitatehdaan == 0:
+            return
+        elif mitatehdaan == 1:
+            numeronarvonta()
+        elif mitatehdaan == 2:
+            yritaarvatanumero()
+        elif mitatehdaan == 3:
+            yritetaanarvatanumero()
+        elif mitatehdaan == 4:
+            kivipaperisakset()
+#####
+def mitatehdaan():
+    print("")
+    while True:
+        print("(!) Quit")
+        print("(1) Text-based games")
+        print("(2) Playing with words")
+        print("(3) Translating")
+        mitatehdaan = annaluku("Choose a category: ", 1, 3)
+        if mitatehdaan == 0:
+            return
+        elif mitatehdaan == 1:
+            tekstipelit()
+        elif mitatehdaan == 2:
+            kirjaimillaleikkimista()
+        elif mitatehdaan == 3:
+            kaantajat()
+#####
+def main():
+    tiedot()
+    try:
+        mitatehdaan()
+    except Exception:
+        print("Error.")
+        return
+    print("The end.")
+    return
+main()
