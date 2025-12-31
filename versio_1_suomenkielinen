@@ -290,11 +290,11 @@ def mitatehdaan():
 #####
 def main():
     tiedot()
-    #try:
-    mitatehdaan()
-    #except Exception:
-        #print("Virhe.")
-        #return
+    try:
+        mitatehdaan()
+    except Exception:
+        print("Virhe.")
+        return
     print("Ohjelma on lopetettu.")
     return
 main()
