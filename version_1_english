@@ -4,6 +4,8 @@ def tiedot():
     print("Silmalasit Useless System")
     print("Made by:")
     print("gamejolt.com/@silmalasit")
+    print("github.com/silmalasit")
+    print("youtube.com/@silmalasit")
     print("Version 1")
     return
 #####
