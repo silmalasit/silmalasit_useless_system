@@ -7,6 +7,7 @@ def tiedot():
     print("github.com/silmalasit")
     print("youtube.com/@silmalasit")
     print("Version 1")
+    print("translated to english")
     return
 #####
 def annaluku(teksti = "Give me a number. ", minimiluku = 0, maximiluku = 1000):
