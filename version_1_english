@@ -1,4 +1,5 @@
 import random
+# '
 """ ##### omat ##### """
 def tiedot():
     print("Silmalasit Useless System")
@@ -16,8 +17,8 @@ def annaluku(teksti = "Give me a number. ", minimiluku = 0, maximiluku = 1000):
         if luku == "":
             continue
         elif luku == "!":
-            return 0
-        elif "!" not in luku:
+            return "!"
+        else:
             try:
                 luku = int(luku)
                 if luku < minimiluku:
@@ -41,7 +42,7 @@ def kaantajamorsekoodi():
         viimeisinmerkki = sana[i:i+1]
         viimeisinmerkki = aakkoset[viimeisinmerkki]
         kaannos = kaannos + viimeisinmerkki + "/"
-    print('"' + sana[0].upper() + sana[1:].lower() + '" is "' + kaannos + ' in morsecode')
+    print('"' + sana[0].upper() + sana[1:].lower() + '" is "' + kaannos + '" inmorsecode')
 """ ##### kirjaimilla leikkimistä ##### """
 def sananpituudenlaskuri(sana = "word"):
     if len(sana) > 1:
@@ -131,7 +132,7 @@ def yritetaanarvatanumero():
                     print("(1)", arvaus, "is less than my number.")
                     print("(2)", arvaus, "is greater than my number.")
                     print("(3) Correct")
-                elif suhde == 1:
+                elif suhde == "!":
                     arvauksiajaljella -= 1
                     minimiarvattavaluku = arvaus + 1
                     break
@@ -163,6 +164,20 @@ def yritaarvatanumero():
         if arvattuluku == "!":
             print("The game has been stopped.")
             return
+        elif arvattuluku > 1000:
+            print("Must be 1000 or less.")
+            print("Try again.")
+            if arvauksiajaljella == 1:
+                print("Only one guess left!")
+            elif arvauksiajaljella > 1:
+                print("You have ", arvauksiajaljella, "tries left.")
+        elif arvattuluku < 0:
+            print("Must be 0 or more.")
+            print("Try again.")
+            if arvauksiajaljella == 1:
+                print("Only one guess left!")
+            elif arvauksiajaljella > 1:
+                print("You have ", arvauksiajaljella, "tries left.")
         elif arvattuluku > arvattavaluku:
             arvauksiajaljella -= 1
             print(arvattuluku,  "is greater than my number.")
@@ -247,7 +262,7 @@ def tekstipelit():
         print("(3) The program tries to guess your number")
         print("(4) Rock paper scissors")
         mitatehdaan = annaluku("What do we do? ", 1, 5)
-        if mitatehdaan == 0:
+        if mitatehdaan == "!":
             return
         elif mitatehdaan == 1:
             numeronarvonta()
@@ -266,7 +281,7 @@ def mitatehdaan():
         print("(2) Playing with words")
         print("(3) Translating")
         mitatehdaan = annaluku("Choose a category: ", 1, 3)
-        if mitatehdaan == 0:
+        if mitatehdaan == "!":
             return
         elif mitatehdaan == 1:
             tekstipelit()
@@ -277,11 +292,11 @@ def mitatehdaan():
 #####
 def main():
     tiedot()
-    try:
-        mitatehdaan()
-    except Exception:
-        print("Error.")
-        return
+    #try:
+    mitatehdaan()
+    #except Exception:
+        #print("Virhe.")
+        #return
     print("The end.")
     return
 main()
