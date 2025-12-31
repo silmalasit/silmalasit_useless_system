@@ -295,7 +295,7 @@ def main():
     try:
         mitatehdaan()
     except Exception:
-        print("Virhe.")
+        print("Error.")
         return
     print("The end.")
     return
